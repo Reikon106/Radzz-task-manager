@@ -1,0 +1,10 @@
+{
+  "name": "radzz-taskmanager",
+  "version": "1.0.0",
+  "description": "Academic Task Management App",
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 3000",
+    "build": "echo 'No build process needed'"
+  }
+}

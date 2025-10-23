@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radzz - Smart Task Manager</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🚀 Radzz</div>
+            <div class="tagline">Smart Task Management for Students</div>
+        </header>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="nav-item active" data-section="dashboard">
+                    <span>📊</span> Dashboard
+                </div>
+                <div class="nav-item" data-section="tasks">
+                    <span>✅</span> My Tasks
+                </div>
+                <div class="nav-item" data-section="study-timer">
+                    <span>⏱️</span> Study Timer
+                </div>
+                <div class="nav-item" data-section="progress">
+                    <span>📈</span> Progress
+                </div>
+                <div class="nav-item" data-section="settings">
+                    <span>⚙️</span> Settings
+                </div>
+                <div class="nav-item" id="auth-button">
+                    <span>🔐</span> Sign In with Google
+                </div>
+            </div>
+            
+            <div class="content-area">
+                <!-- Dashboard Section -->
+                <div class="section active" id="dashboard">
+                    <div class="section-header">
+                        <h2>Study Dashboard</h2>
+                        <button class="btn btn-primary" id="add-task-btn">
+                            <span>+</span> Add New Task
+                        </button>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="total-tasks">0</div>
+                            <div class="stat-label">Total Tasks</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="completed-tasks">0</div>
+                            <div class="stat-label">Completed</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="pending-tasks">0</div>
+                            <div class="stat-label">Pending</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="study-time">0h</div>
+                            <div class="stat-label">Study Time</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">📋 Priority Tasks</div>
+                        </div>
+                        <div class="task-list" id="priority-tasks">
+                            <div class="empty-state">No priority tasks</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tasks Section -->
+                <div class="section" id="tasks">
+                    <div class="section-header">
+                        <h2>Task Management</h2>
+                        <button class="btn btn-primary" id="create-task-btn">
+                            <span>+</span> Create Task
+                        </button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">📝 All Tasks</div>
+                            <div>
+                                <select id="task-filter">
+                                    <option value="all">All Tasks</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="high">High Priority</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="task-list" id="all-tasks">
+                            <div class="empty-state">No tasks yet</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Study Timer Section -->
+                <div class="section" id="study-timer">
+                    <div class="section-header">
+                        <h2>Focus Timer</h2>
+                    </div>
+                    
+                    <div class="study-timer">
+                        <div class="timer-display" id="timer-display">25:00</div>
+                        <div class="timer-controls">
+                            <button class="btn btn-success" id="start-timer">Start</button>
+                            <button class="btn btn-warning" id="pause-timer">Pause</button>
+                            <button class="btn btn-danger" id="reset-timer">Reset</button>
+                        </div>
+                        <div class="timer-settings">
+                            <label>Timer Type:</label>
+                            <select id="timer-type">
+                                <option value="25">Focus (25min)</option>
+                                <option value="5">Short Break (5min)</option>
+                                <option value="15">Long Break (15min)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">🎯 Focus Task</div>
+                        </div>
+                        <div id="focus-task">
+                            <select id="task-selector">
+                                <option value="">Select task to focus on...</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Progress Section -->
+                <div class="section" id="progress">
+                    <div class="section-header">
+                        <h2>Progress Analytics</h2>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">📊 Completion Rate</div>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div id="completion-bar" class="progress-fill"></div>
+                            </div>
+                            <div id="completion-text" class="progress-text">0% Complete</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">📅 This Week's Progress</div>
+                        </div>
+                        <div class="study-chart" id="study-chart">
+                            <!-- Chart will be generated here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Settings Section -->
+                <div class="section" id="settings">
+                    <div class="section-header">
+                        <h2>Settings</h2>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">🔗 Google Integration</div>
+                        </div>
+                        <div class="settings-content">
+                            <p>Connect with Google Tasks to sync your tasks.</p>
+                            <button class="btn btn-primary" id="connect-google-btn">
+                                <span>🔗</span> Connect Google Tasks
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">🎨 Preferences</div>
+                        </div>
+                        <div class="settings-content">
+                            <div class="form-group">
+                                <label>Focus Duration (minutes)</label>
+                                <input type="number" id="study-duration" value="25" min="5" max="60">
+                            </div>
+                            <div class="form-group">
+                                <label>Break Duration (minutes)</label>
+                                <input type="number" id="break-duration" value="5" min="1" max="30">
+                            </div>
+                            <button class="btn btn-success" id="save-preferences">Save Preferences</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Modal -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-title">Create New Task</h3>
+            <div class="form-group">
+                <label>Task Title *</label>
+                <input type="text" id="task-title" placeholder="Enter task title..." required>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="task-notes" placeholder="Enter task description..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Due Date</label>
+                <input type="date" id="task-due">
+            </div>
+            <div class="form-group">
+                <label>Priority</label>
+                <select id="task-priority">
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-warning" id="cancel-task">Cancel</button>
+                <button class="btn btn-success" id="save-task">Save Task</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>
